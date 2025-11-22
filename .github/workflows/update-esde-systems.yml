@@ -1,0 +1,64 @@
+# This workflow checks for updates to ES-DE Android custom systems configuration files
+name: Daily ES-DE Custom Systems Check
+
+# This section defines the trigger for the workflow.
+on:
+  # This makes the workflow run on a schedule. '0 6 * * *' means it will run every day at 6:00 AM UTC.
+  schedule:
+    - cron: '0 6 * * *'
+  # This allows you to manually run the workflow from the GitHub Actions tab, which is great for testing.
+  workflow_dispatch:
+
+jobs:
+  # The name of the job we are running.
+  update-esde-configs:
+    # This job will run on a standard, up-to-date virtual machine.
+    runs-on: ubuntu-latest
+    
+    # These permissions are required for the workflow to be able to write changes back to your repository.
+    permissions:
+      contents: write
+    
+    steps:
+      # Step 1: Check out your repository's code so the script can work with your files.
+      - name: Check out repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Download the latest es_find_rules.xml file
+      - name: Download latest es_find_rules.xml
+        run: |
+          FILE_PATH="ES-DE/custom_systems/es_find_rules.xml"
+          SOURCE_URL="https://raw.githubusercontent.com/GlazedBelmont/es-de-android-custom-systems/main/es_find_rules.xml"
+          echo "Downloading from $SOURCE_URL to $FILE_PATH"
+          curl -L -o "$FILE_PATH" "$SOURCE_URL"
+      
+      # Step 3: Download the latest es_systems.xml file
+      - name: Download latest es_systems.xml
+        run: |
+          FILE_PATH="ES-DE/custom_systems/es_systems.xml"
+          SOURCE_URL="https://raw.githubusercontent.com/GlazedBelmont/es-de-android-custom-systems/main/es_systems.xml"
+          echo "Downloading from $SOURCE_URL to $FILE_PATH"
+          curl -L -o "$FILE_PATH" "$SOURCE_URL"
+      
+      # Step 4: Check if the downloaded files are actually different from the old ones.
+      - name: Check for file changes
+        id: git-check
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected. ES-DE custom systems are already up-to-date."
+            echo "changed=false" >> $GITHUB_ENV
+          else
+            echo "New ES-DE custom systems version detected. Committing changes..."
+            echo "changed=true" >> $GITHUB_ENV
+          fi
+      
+      # Step 5: If and only if files have changed, commit them back to your repository.
+      - name: Commit and Push updated XML files
+        if: env.changed == 'true'
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add ES-DE/custom_systems/es_find_rules.xml
+          git add ES-DE/custom_systems/es_systems.xml
+          git commit -m "chore(auto-update): Update ES-DE custom systems XML files to latest version"
+          git push origin main

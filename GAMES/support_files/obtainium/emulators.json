@@ -1,0 +1,170 @@
+{
+  "apps": [
+    {
+      "id": "dev.eden.eden_emulator",
+      "url": "https://git.eden-emu.dev/eden-emu/eden",
+      "author": "eden-emu",
+      "name": "Eden (Switch - Primary)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitLab"
+    },
+    {
+      "id": "org.citron.citron_emu",
+      "url": "https://git.citron-emu.org/citron/emulator",
+      "author": "citron-emu.org",
+      "name": "CITRON (Switch - Alternative)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true,\"apkFilterRegEx\":\"Android\"}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitLab"
+    },
+    {
+      "id": "org.citra.emu",
+      "url": "https://github.com/weihuoya/citra",
+      "author": "weihuoya",
+      "name": "Citra MMJ (3DS - Primary)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "io.github.lim3ds.android",
+      "url": "https://github.com/SapphireRhodonite/azahar",
+      "author": "SapphireRhodonite",
+      "name": "Azahar (3DS - Alt)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "info.cemu.cemu",
+      "url": "https://github.com/SapphireRhodonite/Cemu",
+      "author": "SapphireRhodonite",
+      "name": "Cemu (Wii U - Dual Screen)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "me.magnum.melonds",
+      "url": "https://github.com/SapphireRhodonite/melonDS-android",
+      "author": "SapphireRhodonite",
+      "name": "MelonDS (DS - Dual Screen)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "net.rpcsx.rpcsx",
+      "url": "https://github.com/RPCSX/rpcsx-ui-android",
+      "author": "RPCSX",
+      "name": "RPCSX (PS3 - Experimental)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "org.dolphinemu.dolphinemu",
+      "url": "https://dolphin-emu.org/download/",
+      "author": "dolphin-emu.org",
+      "name": "Dolphin (GC/Wii)",
+      "additionalSettings": "{\"intermediateLink\":[],\"customLinkFilterRegex\":\"https:\\\\/\\\\/dl.dolphin-emu.org\\\\/releases.+dolphin-master.+aarch64.apk\",\"sortByLastLinkSegment\":true,\"versionExtractionRegEx\":\"dolphin-master-(.+?)-aarch64.apk\",\"matchGroupToUse\":\"1\"}",
+      "categories": ["Emulator"],
+      "overrideSource": "HTML"
+    },
+    {
+      "id": "xyz.aethersx2.android",
+      "url": "https://github.com/Trixarian/NetherSX2-classic",
+      "author": "Trixarian",
+      "name": "NetherSX2 (PS2)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "com.github.stenzek.duckstation",
+      "url": "https://www.duckstation.org/android/",
+      "author": "stenzek",
+      "name": "DuckStation (PS1)",
+      "additionalSettings": "{\"customLinkFilterRegex\":\"duckstation-android-latest.apk\"}",
+      "categories": ["Emulator"],
+      "overrideSource": "HTML"
+    },
+    {
+      "id": "org.ppsspp.ppsspp",
+      "url": "https://ppsspp.org/downloads.html",
+      "author": "ppsspp.org",
+      "name": "PPSSPP (PSP)",
+      "additionalSettings": "{\"customLinkFilterRegex\":\"https://www.ppsspp.org/files/.+/ppsspp.apk\",\"versionExtractionRegEx\":\"/files/([0-9.]+)/ppsspp.apk\",\"matchGroupToUse\":\"1\"}",
+      "categories": ["Emulator"],
+      "overrideSource": "HTML"
+    },
+    {
+      "id": "org.vita3k.emulator",
+      "url": "https://github.com/Vita3K/Vita3K-Android",
+      "author": "Vita3K",
+      "name": "Vita3K (PS Vita)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Emulator"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "com.retroarch.aarch64",
+      "url": "https://buildbot.libretro.com/stable/",
+      "author": "libretro",
+      "name": "RetroArch (Multi-system)",
+      "additionalSettings": "{\"intermediateLink\":[{\"customLinkFilterRegex\":\"/stable/[0-9.]+/android/\"}],\"customLinkFilterRegex\":\"RetroArch_aarch64.apk\",\"versionExtractionRegEx\":\"/stable/([0-9.]+)/android/\"}",
+      "categories": ["Emulator"],
+      "overrideSource": "HTML"
+    },
+    {
+      "id": "com.winlator",
+      "url": "https://github.com/brunodev85/winlator",
+      "author": "brunodev85",
+      "name": "Winlator",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["PC Emulation"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "gamehub.lite",
+      "url": "https://github.com/gamehublite/gamehub-oss",
+      "author": "gamehublite",
+      "name": "GameHub",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["PC Emulation"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "app.gamenative",
+      "url": "https://github.com/utkarshdalal/GameNative",
+      "author": "utkarshdalal",
+      "name": "GameNative",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["PC Emulation"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "com.limelight.noir",
+      "url": "https://github.com/ClassicOldSong/moonlight-android",
+      "author": "ClassicOldSong",
+      "name": "Artemis (Streaming)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Streaming"],
+      "overrideSource": "GitHub"
+    },
+    {
+      "id": "com.limelight",
+      "url": "https://github.com/moonlight-stream/moonlight-android",
+      "author": "moonlight-stream",
+      "name": "Moonlight (Streaming)",
+      "additionalSettings": "{\"includePrereleases\":true,\"autoApkFilterByArch\":true}",
+      "categories": ["Streaming"],
+      "overrideSource": "GitHub"
+    }
+  ],
+  "settings": {
+    "categories": "{\"Emulator\":4292386421,\"PC Emulation\":4285381755,\"Streaming\":4292056539}",
+    "groupByCategory": true
+  }
+}

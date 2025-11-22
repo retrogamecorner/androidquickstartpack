@@ -1,0 +1,65 @@
+# This is the name of the automated workflow, which you'll see in the "Actions" tab of your repository.
+name: Daily Obtainium APK Check
+
+# This section defines the trigger for the workflow.
+on:
+  # This makes the workflow run on a schedule. '0 5 * * *' means it will run every day at 5:00 AM UTC.
+  schedule:
+    - cron: '0 5 * * *'
+  # This allows you to manually run the workflow from the GitHub Actions tab, which is great for testing.
+  workflow_dispatch:
+
+jobs:
+  # The name of the job we are running.
+  update-apk:
+    # This job will run on a standard, up-to-date virtual machine.
+    runs-on: ubuntu-latest
+    
+    # These permissions are required for the workflow to be able to write changes back to your repository.
+    permissions:
+      contents: write
+    
+    steps:
+      # Step 1: Check out your repository's code so the script can work with your files.
+      - name: Check out repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Get latest Obtainium release URL (with error handling)
+      - name: Get latest Obtainium release URL
+        id: get_url
+        run: |
+          APK_URL=$(curl -s "https://api.github.com/repos/ImranR98/Obtainium/releases/latest" | jq -r '.assets[] | select(.name == "app-release.apk") | .browser_download_url')
+          if [ -z "$APK_URL" ] || [ "$APK_URL" == "null" ]; then
+            echo "Error: Could not find app-release.apk in latest release"
+            exit 1
+          fi
+          echo "APK_URL=$APK_URL" >> $GITHUB_ENV
+      
+      # Step 3: Download the latest APK directly into the correct folder, overwriting the old one.
+      - name: Download latest Obtainium APK
+        run: |
+          FILE_PATH="GAMES/installers/app-release.apk"
+          echo "Downloading from ${{ env.APK_URL }} to $FILE_PATH"
+          curl -L -o "$FILE_PATH" "${{ env.APK_URL }}"
+      
+      # Step 4: Check if the downloaded file is actually different from the old one.
+      - name: Check for file changes
+        id: git-check
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected. Obtainium is already up-to-date."
+            echo "changed=false" >> $GITHUB_ENV
+          else
+            echo "New Obtainium version detected. Committing changes..."
+            echo "changed=true" >> $GITHUB_ENV
+          fi
+      
+      # Step 5: Commit and Push (with explicit branch)
+      - name: Commit and Push new APK
+        if: env.changed == 'true'
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add GAMES/installers/app-release.apk
+          git commit -m "chore(auto-update): Update Obtainium APK to latest version"
+          git push origin main

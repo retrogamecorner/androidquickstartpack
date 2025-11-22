@@ -1,0 +1,20 @@
+System name:
+windows
+
+Full system name:
+Microsoft Windows
+
+Supported file extensions:
+.desktop
+
+Launch command:
+%EMULATOR_WINLATOR-GLIBC% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%
+
+Alternative launch command:
+%EMULATOR_WINLATOR-PROOT% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%
+
+Platform (for scraping):
+pcwindows
+
+Theme folder:
+windows
