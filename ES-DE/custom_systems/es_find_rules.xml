@@ -59,13 +59,25 @@
 			<entry>org.shiiion.primehack/org.dolphinemu.dolphinemu.ui.main.MainActivity</entry>
         </rule>
     </emulator>
-    <emulator name="MELONDUALDS">
+    <emulator name="EMUCOREX">
+        <!-- Sony PlayStation 2 emulator EmuCoreX -->
+        <rule type="androidpackage">
+            <entry>com.sbro.emucorex/.MainActivity</entry>
+        </rule>
+    </emulator>
+	<emulator name="MELONDUALDS">
         <!-- Nintendo DS and DSi emulator melonDS (Nightly build) -->
         <rule type="androidpackage">
 			<entry>me.magnum.melondualds/me.magnum.melonds.ui.emulator.EmulatorActivity</entry>
 			<entry>me.magnum.melonds.dev/me.magnum.melonds.ui.emulator.EmulatorActivity</entry>
         </rule>
     </emulator>
+	<emulator name="NETHERSX2-TURNIP">
+		<!-- Sony PlayStation 2 emulator NetherSX2-Turnip -->
+		<rule type="androidpackage">
+			<entry>xyz.aethersx2.tturnip/xyz.aethersx2.android.EmulationActivity</entry>
+		</rule>
+	</emulator>
     <emulator name="NYUSHU">
         <!-- Nintendo Switch emulator Nyushu -->
         <rule type="androidpackage">
