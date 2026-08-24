@@ -1,0 +1,67 @@
+name: Daily Obtainium Emulation Pack Check
+
+on:
+  schedule:
+    - cron: '15 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-pack:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Download latest Obtainium Emulation Pack JSON files
+        env:
+          API_URL: https://api.github.com/repos/RJNY/Obtainium-Emulation-Pack/releases/latest
+          TARGET_DIR: GAMES/support_files/obtainium
+        run: |
+          set -euo pipefail
+
+          mkdir -p "$TARGET_DIR"
+
+          RELEASE_JSON="$(curl -fsSL "$API_URL")"
+
+          PACK_NAME="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-v.*\\.json$")) | .name')"
+          PACK_URL="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-v.*\\.json$")) | .browser_download_url')"
+          DUAL_NAME="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-dual-screen-v.*\\.json$")) | .name')"
+          DUAL_URL="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-dual-screen-v.*\\.json$")) | .browser_download_url')"
+
+          if [ -z "$PACK_NAME" ] || [ "$PACK_NAME" = "null" ] || [ -z "$PACK_URL" ] || [ "$PACK_URL" = "null" ]; then
+            echo "Error: Could not find obtainium-emulation-pack JSON asset in latest release"
+            exit 1
+          fi
+
+          if [ -z "$DUAL_NAME" ] || [ "$DUAL_NAME" = "null" ] || [ -z "$DUAL_URL" ] || [ "$DUAL_URL" = "null" ]; then
+            echo "Error: Could not find obtainium-emulation-pack-dual-screen JSON asset in latest release"
+            exit 1
+          fi
+
+          find "$TARGET_DIR" -maxdepth 1 -type f \( -name 'obtainium-emulation-pack-v*.json' -o -name 'obtainium-emulation-pack-dual-screen-v*.json' \) -delete
+
+          curl -fsSL -o "$TARGET_DIR/$PACK_NAME" "$PACK_URL"
+          curl -fsSL -o "$TARGET_DIR/$DUAL_NAME" "$DUAL_URL"
+
+      - name: Check for file changes
+        run: |
+          if [ -n "$(git status --porcelain -- GAMES/support_files/obtainium)" ]; then
+            echo "New Obtainium Emulation Pack version detected. Committing changes..."
+            echo "changed=true" >> "$GITHUB_ENV"
+          else
+            echo "No changes detected. Obtainium Emulation Pack JSON files are already up to date."
+            echo "changed=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Commit and push updated JSON files
+        if: env.changed == 'true'
+        run: |
+          git config user.name 'GitHub Actions Bot'
+          git config user.email 'actions@github.com'
+          git add --all GAMES/support_files/obtainium
+          git commit -m "chore(auto-update): Update Obtainium Emulation Pack JSON files"
+          git push origin main

@@ -1,0 +1,17 @@
+System name:
+switch
+
+Full system name:
+Nintendo Switch
+
+Supported file extensions:
+.nca .NCA .nro .NRO .nso .NSO .nsp .NSP .xci .XCI
+
+Launch command:
+%EMULATOR_SKYLINE% %ACTION%=android.intent.action.VIEW %DATA%=%ROMPROVIDER%
+
+Platform (for scraping):
+switch
+
+Theme folder:
+switch

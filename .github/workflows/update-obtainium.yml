@@ -22,7 +22,7 @@ jobs:
     steps:
       # Step 1: Check out your repository's code so the script can work with your files.
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       # Step 2: Get latest Obtainium release URL (with error handling)
       - name: Get latest Obtainium release URL
