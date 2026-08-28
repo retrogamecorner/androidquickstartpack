@@ -13,6 +13,12 @@
             <entry>com.armsx3/com.armsx2.Main</entry>
         </rule>
     </emulator>
+	<emulator name="BACHATAS4">
+        <!-- Sony PlayStation 4 emulator BachataS4 -->
+        <rule type="androidpackage">
+            <entry>com.bachatas4.android/.DirectLaunchActivity</entry>
+        </rule>
+    </emulator>
 	<emulator name="BENJI-SC">
         <!-- Nintendo Switch emulator Benji-SC -->
         <rule type="androidpackage">
@@ -69,6 +75,12 @@
         <rule type="androidpackage">
             <entry>org.dolphinemu.primehack/org.dolphinemu.dolphinemu.ui.main.MainActivity</entry>
 			<entry>org.shiiion.primehack/org.dolphinemu.dolphinemu.ui.main.MainActivity</entry>
+        </rule>
+    </emulator>
+	<emulator name="EMUCOREC">
+        <!-- Sony PlayStation 3 emulator EmuCoreC -->
+        <rule type="androidpackage">
+            <entry>com.sbro.emucorec/.core.ps3.Emulator</entry>
         </rule>
     </emulator>
     <emulator name="EMUCOREV">
@@ -152,6 +164,12 @@
             <entry>com.antutu.ABenchMark/org.uzuy.uzuy_emu.activities.EmulationActivity</entry>
         </rule>
     </emulator>
+	<emulator name="VITA3KPLUS">
+        <!-- Sony PlayStation Vita emulator Vita3K+ -->
+        <rule type="androidpackage">
+            <entry>org.vita3kplus.emulator/org.vita3k.emulator.Emulator</entry>
+        </rule>
+    </emulator>
     <emulator name="VITA3KZX">
         <!-- Sony PlayStation Vita emulator Vita3K ZX -->
         <rule type="androidpackage">
@@ -164,6 +182,15 @@
             <entry>com.winlator.vanilla/com.winlator.cmod.XServerDisplayActivity</entry>
 			<entry>com.ludashi.benchmark/com.winlator.cmod.XServerDisplayActivity</entry>
 			<entry>com.miHoYo.GenshinImpact/com.winlator.cmod.XServerDisplayActivity</entry>
+        </rule>
+    </emulator>
+	<emulator name="WINNATIVE">
+        <!-- Microsoft Windows emulator Winlator Cmod -->
+        <rule type="androidpackage">
+            <entry>com.winnative.cmod/com.winlator.cmod.runtime.display.XServerDisplayActivity</entry>
+			<entry>com.antutu.ABenchMark/com.winlator.cmod.runtime.display.XServerDisplayActivity</entry>
+			<entry>com.ludashi.benchmark/com.winlator.cmod.runtime.display.XServerDisplayActivity</entry>
+			<entry>com.tencent.ig/com.winlator.cmod.runtime.display.XServerDisplayActivity</entry>
         </rule>
     </emulator>
 	<emulator name="X360MOBILE">
@@ -182,6 +209,13 @@
         <!-- Microsoft Xbox 360 emulator XenDroid -->
         <rule type="androidpackage">
             <entry>xendroid.compose/.EmulatorHostActivity</entry>
+        </rule>
+    </emulator>
+	<emulator name="XENRA">
+        <!-- Microsoft Xbox and Xbox 360 emulator Xenra -->
+        <rule type="androidpackage">
+            <entry>Ali.Xanite/Ali.Xanite.LauncherActivity</entry>
+			<entry>Ali.Xanite.green/Ali.Xanite.LauncherActivity</entry>
         </rule>
     </emulator>
     <emulator name="YUZU">

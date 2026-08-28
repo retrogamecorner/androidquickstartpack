@@ -199,8 +199,20 @@
         <command label="aPS3e Directory (Standalone)">%EMULATOR_APS3E% %ACTION%=aenu.intent.action.APS3E %EXTRA_game_dir%=%ROM%</command>
         <command label="aPS3e ISO (Standalone)">%EMULATOR_APS3E% %ACTION%=aenu.intent.action.APS3E %EXTRA_iso_uri%=%ROMSAF%</command>
 		<command label="ARMSX3 (Standalone)">%EMULATOR_ARMSX3% %EXTRA_path%=%ROM%</command>
+		<command label="ARMSX3 Game Serial (Standalone)">%EMULATOR_ARMSX3% %ACTION%=android.intent.action.VIEW %EXTRA_path%=%EXTERNALDATA%/Android/data/%ANDROIDPACKAGE%/files/config/dev_hdd0/game/%INJECT%=%BASENAME%.ps3</command>
+		<command label="EmuCoreC (Standalone)">%EMULATOR_EMUCOREC% %EXTRA_gamePath%=%ROM%</command>
+		<command label="EmuCoreC Game Serial (Standalone)">%EMULATOR_EMUCOREC% %EXTRA_titleID%=%INJECT%=%BASENAME%.ps3</command>
         <platform>ps3</platform>
         <theme>ps3</theme>
+    </system>
+	<system>
+        <name>ps4</name>
+        <fullname>Sony PlayStation 4</fullname>
+        <path>%ROMPATH%/ps4</path>
+        <extension>.ps4 .PS4</extension>
+        <command label="BachataS4 (Standalone)">%EMULATOR_BACHATAS4% %EXTRA_game_id%=%INJECT%=%BASENAME%.ps4</command>
+        <platform>ps4</platform>
+        <theme>ps4</theme>
     </system>
     <system>
         <name>psvita</name>
@@ -208,6 +220,7 @@
         <path>%ROMPATH%/psvita</path>
         <extension>.psvita</extension>
         <command label="Vita3K (Standalone)">%EMULATOR_VITA3K% %EXTRAARRAY_AppStartParameters%=-r,%INJECT%=%BASENAME%.psvita</command>
+		<command label="Vita3K+ (Standalone)">%EMULATOR_VITA3KPLUS% %EXTRAARRAY_AppStartParameters%=-r,%INJECT%=%BASENAME%.psvita</command>
         <command label="Vita3KZX (Standalone)">%EMULATOR_VITA3KZX% %EXTRAARRAY_AppStartParameters%=-r,%INJECT%=%BASENAME%.psvita</command>
 		<command label="EmuCoreV (Standalone)">%EMULATOR_EMUCOREV% %EXTRAARRAY_AppStartParameters%=-r,%INJECT%=%BASENAME%.psvita</command>
         <platform>psvita</platform>
@@ -333,6 +346,7 @@
 		<command label="Winlator-Ludashi (Standalone)">%EMULATOR_WINLATOR-LUDASHI% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%</command>
 		<command label="Winlator Cmod Glibc (Standalone)">%EMULATOR_WINLATOR-GLIBC% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%</command>
         <command label="Winlator Cmod PRoot (Standalone)">%EMULATOR_WINLATOR-PROOT% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%</command>
+		<command label="WinNative (Standalone)">%EMULATOR_WINNATIVE% %ACTIVITY_CLEAR_TASK% %ACTIVITY_CLEAR_TOP% %EXTRA_shortcut_path%=%ROM%</command>
 		<command label="GameNative Steam (Standalone)">%EMULATOR_GAMENATIVE% %ACTION%=app.gamenative.LAUNCH_GAME %EXTRAINTEGER_app_id%=%INJECT%=%ROM%</command>
 		<command label="GameNative Custom Game (Standalone)">%EMULATOR_GAMENATIVE% %ACTION%=app.gamenative.LAUNCH_GAME %EXTRA_game_source%=CUSTOM_GAME %EXTRAINTEGER_app_id%=%INJECT%=%ROM%</command>
 		<command label="GameNative EPIC (Standalone)">%EMULATOR_GAMENATIVE% %ACTION%=app.gamenative.LAUNCH_GAME %EXTRA_game_source%=EPIC %EXTRAINTEGER_app_id%=%INJECT%=%ROM%</command>
@@ -343,6 +357,17 @@
         <theme>windows</theme>
     </system>
 	<system>
+        <name>xbox</name>
+        <fullname>Microsoft Xbox</fullname>
+        <path>%ROMPATH%/xbox</path>
+        <extension>.iso .ISO .xiso .XISO</extension>
+        <command label="X1 BOX (Standalone)">%EMULATOR_X1-BOX% %ACTION%=android.intent.action.VIEW %DATA%=%ROMSAF%</command>
+        <command label="hakuX (Standalone)">%EMULATOR_HAKUX% %ACTION%=android.intent.action.VIEW %DATA%=%ROMSAF%</command>
+        <command label="Xenra (Standalone)">%EMULATOR_XENRA% %DATA%=%ROMSAF%</command>
+        <platform>xbox</platform>
+        <theme>xbox</theme>
+    </system>
+	<system>
         <name>xbox360</name>
         <fullname>Microsoft Xbox 360</fullname>
         <path>%ROMPATH%/xbox360</path>
@@ -350,6 +375,7 @@
         <command label="aX360e (Standalone)">%EMULATOR_AX360E% %ACTION%=aenu.intent.action.AX360E %EXTRA_game_uri%=%ROMSAF%</command>
 		<command label="X360 Mobile (Standalone)">%EMULATOR_X360MOBILE% %DATA%=%ROMSAF%</command>
 		<command label="XenDroid (Standalone)">%EMULATOR_XENDROID% %DATA%=%ROMSAF%</command>
+		<command label="Xenra (Standalone)">%EMULATOR_XENRA% %DATA%=%ROMSAF%</command>
         <platform>xbox360</platform>
         <theme>xbox360</theme>
     </system>
