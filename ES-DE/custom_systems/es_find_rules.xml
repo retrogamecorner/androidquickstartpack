@@ -68,6 +68,12 @@
 			<entry>org.shiiion.primehack/org.dolphinemu.dolphinemu.ui.main.MainActivity</entry>
         </rule>
     </emulator>
+	<emulator name="EDENDUO">
+        <!-- Nintendo Switch emulator Eden -->
+        <rule type="androidpackage">
+            <entry>dev.igawa6.edenduo/org.yuzu.yuzu_emu.activities.EmulationActivity</entry>
+        </rule>
+    </emulator>
 	<emulator name="GOPHER64">
         <!-- Nintendo 64 emulator Gopher64 -->
         <rule type="androidpackage">
@@ -140,6 +146,12 @@
         <!-- Xbox Game Streaming XBPlay -->
         <rule type="androidpackage">
             <entry>com.studio08.xbgamestream/com.studio08.xbgamestream.PWAMainMenuActivity</entry>
+        </rule>
+    </emulator>
+	<emulator name="XENDROIDPLUS">
+        <!-- Microsoft Xbox 360 emulator XenDroid+ -->
+        <rule type="androidpackage">
+            <entry>xendroid.compose.fork/xendroid.compose.EmulatorHostActivity</entry>
         </rule>
     </emulator>
     <emulator name="YUZU">

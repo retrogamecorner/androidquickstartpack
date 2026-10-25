@@ -260,6 +260,7 @@
         <extension>.nca .NCA .nro .NRO .nso .NSO .nsp .NSP .xci .XCI</extension>
         <command label="Eden (Standalone)">%EMULATOR_EDEN% %ACTION%=android.nfc.action.TECH_DISCOVERED %DATA%=%ROMPROVIDER%</command>
         <command label="Eden Nightly (Standalone)">%EMULATOR_EDEN-NIGHTLY% %ACTION%=android.nfc.action.TECH_DISCOVERED %DATA%=%ROMPROVIDER%</command>
+		<command label="Eden Duo (Standalone)">%EMULATOR_EDENDUO% %ACTION%=android.nfc.action.TECH_DISCOVERED %DATA%=%ROMPROVIDER%</command>
 		<command label="Lemon (Standalone)">%EMULATOR_LEMON% %ACTION%=android.nfc.action.TECH_DISCOVERED %DATA%=%ROMPROVIDER%</command>
         <command label="Citron (Standalone)">%EMULATOR_CITRON% %ACTION%=android.nfc.action.TECH_DISCOVERED %DATA%=%ROMPROVIDER%</command>
         <command label="Kenji-NX (Standalone)">%EMULATOR_KENJI-NX% %ACTION%=org.kenjinx.android.LAUNCH_GAME %EXTRA_bootPath%=%ROMSAF%</command>
@@ -333,7 +334,6 @@
         <platform>pcwindows</platform>
         <theme>windows</theme>
     </system>
-
 	<system>
         <name>xbox360</name>
         <fullname>Microsoft Xbox 360</fullname>
@@ -342,6 +342,7 @@
         <command label="aX360e (Standalone)">%EMULATOR_AX360E% %ACTION%=aenu.intent.action.AX360E %EXTRA_game_uri%=%ROMSAF%</command>
 		<command label="X360 Mobile (Standalone)">%EMULATOR_X360MOBILE% %DATA%=%ROMSAF%</command>
 		<command label="XenDroid (Standalone)">%EMULATOR_XENDROID% %DATA%=%ROMSAF%</command>
+		<command label="XenDroid+ (Standalone)">%EMULATOR_XENDROIDPLUS% %DATA%=%ROMSAF%</command>
 		<command label="Xenra (Standalone)">%EMULATOR_XENRA% %DATA%=%ROMSAF%</command>
         <platform>xbox360</platform>
         <theme>xbox360</theme>
