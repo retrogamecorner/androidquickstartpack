@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-pack:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: write
@@ -15,8 +15,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.repository.default_branch }}
 
-      - name: Download latest Obtainium Emulation Pack JSON files
+      - name: Download latest Obtainium Emulation Pack JSON
         env:
           API_URL: https://api.github.com/repos/RJNY/Obtainium-Emulation-Pack/releases/latest
           TARGET_DIR: GAMES/support_files/obtainium
@@ -24,28 +26,38 @@ jobs:
           set -euo pipefail
 
           mkdir -p "$TARGET_DIR"
+          TEMP_PATH="$(mktemp "$TARGET_DIR/.obtainium-emulation-pack.XXXXXX.json")"
+          trap 'rm -f "$TEMP_PATH"' EXIT
 
           RELEASE_JSON="$(curl -fsSL "$API_URL")"
 
-          PACK_NAME="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-v.*\\.json$")) | .name')"
-          PACK_URL="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-v.*\\.json$")) | .browser_download_url')"
-          DUAL_NAME="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-dual-screen-v.*\\.json$")) | .name')"
-          DUAL_URL="$(printf '%s' "$RELEASE_JSON" | jq -r '.assets[] | select(.name | test("^obtainium-emulation-pack-dual-screen-v.*\\.json$")) | .browser_download_url')"
+          PACK_ASSETS="$(printf '%s' "$RELEASE_JSON" | jq -c '[.assets[] | select(.name | test("^obtainium-emulation-pack-v[^/]+\\.json$"))]')"
+          PACK_COUNT="$(printf '%s' "$PACK_ASSETS" | jq 'length')"
+
+          if [ "$PACK_COUNT" -ne 1 ]; then
+            echo "Error: Expected exactly one standard Obtainium Emulation Pack JSON asset, found $PACK_COUNT"
+            exit 1
+          fi
+
+          PACK_NAME="$(printf '%s' "$PACK_ASSETS" | jq -r '.[0].name')"
+          PACK_URL="$(printf '%s' "$PACK_ASSETS" | jq -r '.[0].browser_download_url')"
 
           if [ -z "$PACK_NAME" ] || [ "$PACK_NAME" = "null" ] || [ -z "$PACK_URL" ] || [ "$PACK_URL" = "null" ]; then
-            echo "Error: Could not find obtainium-emulation-pack JSON asset in latest release"
+            echo "Error: The standard Obtainium Emulation Pack asset is missing a name or download URL"
             exit 1
           fi
 
-          if [ -z "$DUAL_NAME" ] || [ "$DUAL_NAME" = "null" ] || [ -z "$DUAL_URL" ] || [ "$DUAL_URL" = "null" ]; then
-            echo "Error: Could not find obtainium-emulation-pack-dual-screen JSON asset in latest release"
+          echo "Downloading $PACK_NAME"
+          if ! curl --fail --location --silent --show-error -o "$TEMP_PATH" "$PACK_URL"; then
+            echo "Error: Failed to download $PACK_NAME"
             exit 1
           fi
 
-          find "$TARGET_DIR" -maxdepth 1 -type f \( -name 'obtainium-emulation-pack-v*.json' -o -name 'obtainium-emulation-pack-dual-screen-v*.json' \) -delete
-
-          curl -fsSL -o "$TARGET_DIR/$PACK_NAME" "$PACK_URL"
-          curl -fsSL -o "$TARGET_DIR/$DUAL_NAME" "$DUAL_URL"
+          find "$TARGET_DIR" -maxdepth 1 -type f \
+            \( -name 'obtainium-emulation-pack-v*.json' -o -name 'obtainium-emulation-pack-dual-screen-*.json' \) \
+            -delete
+          mv "$TEMP_PATH" "$TARGET_DIR/$PACK_NAME"
+          trap - EXIT
 
       - name: Check for file changes
         run: |
@@ -59,9 +71,13 @@ jobs:
 
       - name: Commit and push updated JSON files
         if: env.changed == 'true'
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           git config user.name 'GitHub Actions Bot'
           git config user.email 'actions@github.com'
-          git add --all GAMES/support_files/obtainium
+          git add -A -- \
+            'GAMES/support_files/obtainium/obtainium-emulation-pack-v*.json' \
+            'GAMES/support_files/obtainium/obtainium-emulation-pack-dual-screen-*.json'
           git commit -m "chore(auto-update): Update Obtainium Emulation Pack JSON files"
-          git push origin main
+          git push origin "HEAD:${DEFAULT_BRANCH}"
